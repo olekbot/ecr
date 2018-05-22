@@ -1,9 +1,11 @@
 pipeline:
-  # create_repo:
-  #   image: ubox/awscli
-  #   commands:
-  #     - export AWS_DEFAULT_REGION=us-east-1
-  #     - aws ecr create-repository --repository-name ecr-demo-api
+  login:
+    image: ubox/awscli
+    commands:
+      - export login_string=`aws ecr get-login us-east-1`
+      - eval $login_string
+      # - export AWS_DEFAULT_REGION=us-east-1
+      # - aws ecr create-repository --repository-name ecr-demo-api
   build_app:
     image: plugins/ecr
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
