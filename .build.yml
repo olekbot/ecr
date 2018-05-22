@@ -7,6 +7,6 @@ publish:
  deploy:
     image: docker
     commands:
-      - docker stack deploy -c nginx.yml demo
+      - docker stack deploy -c nginx.yml test
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
