@@ -10,7 +10,7 @@ services:
       labels:
         - traefik.port=80
         - traefik.frontend.passHostHeader=true
-        - traefik.frontend.rule=Host:uptest.treehub.me;Path:/api
+        - traefik.frontend.rule=Host:uptest.treehub.me;PathPrefix:/api
         - traefik.frontend.headers.SSLRedirect=true
         - traefik.docker.network=appnet
 
