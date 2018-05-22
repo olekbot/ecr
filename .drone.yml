@@ -4,14 +4,14 @@ pipeline:
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
-    tags: $$COMMIT
+    tags: "${DRONE_COMMIT_SHA:0:8}"
   build_api:
     image: plugins/ecr
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
     dockerfile: Dockerfile.api
-    tags: $$COMMIT
+    tags: "${DRONE_COMMIT_SHA:0:8}"
   deploy:
     image: docker
     commands:
