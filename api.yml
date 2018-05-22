@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   api:
-    image: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api:${DRONE_COMMIT_SHA:0:8}
+    image: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api:$${DRONE_COMMIT_SHA:0:8}
     networks:
       - appnet
     deploy:
