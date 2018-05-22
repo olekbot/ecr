@@ -1,0 +1,18 @@
+
+version: '3.5'
+
+services:
+
+  nginx-test:
+    image: ubox/demonginx
+    networks:
+      - appnet
+    deploy:
+      replicas: 2
+      labels:
+        - traefik.port=80
+
+
+networks:
+  appnet:
+    external: true
