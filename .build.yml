@@ -1,15 +1,12 @@
 publish:
   ecr:
     image: plugins/ecr
-    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/bar
+    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
  deploy:
     image: docker
     commands:
       - docker stack deploy -c nginx.yml demo
-      - whoami
-      - pwd
-      - cat /etc/password
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
