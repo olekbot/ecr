@@ -1,8 +1,8 @@
 pipeline:
-  login:
-    image: ubox/awscli
-    commands:
-      - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
+#   login:
+#     image: ubox/awscli
+#     commands:
+#       - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
   build_app:
     image: plugins/ecr
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
@@ -17,6 +17,9 @@ pipeline:
   deploy:
     image: docker
     commands:
+      - apk --no-cache add python py-pip py-setuptools ca-certificates curl groff less && \
+      - pip --no-cache-dir install awscli
+      - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
       - eval $login_string
       - docker pull 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
       - docker pull 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api
