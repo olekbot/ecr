@@ -1,10 +1,10 @@
 pipeline:
- ecr:
+  ecr:
     image: plugins/ecr
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
- deploy:
+  deploy:
     image: docker
     commands:
       - docker stack deploy -c nginx.yml test
