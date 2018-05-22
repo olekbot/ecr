@@ -1,16 +1,12 @@
 pipeline:
-#   login:
-#     image: ubox/awscli
-#     commands:
-#       - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
-  build_app:
+  build_front:
     image: plugins/ecr
-    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
+    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo:$DRONE_COMMIT
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
   build_api:
     image: plugins/ecr
-    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api
+    repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api:$DRONE_COMMIT
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
     dockerfile: Dockerfile.api
