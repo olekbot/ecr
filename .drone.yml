@@ -19,9 +19,7 @@ pipeline:
       - pip --no-cache-dir install awscli
       - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
       - eval $login_string
-      - docker pull 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
-      - docker pull 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api
-      - docker stack deploy -c app.yml test
-      - docker stack deploy -c api.yml test
+      - docker stack deploy -c app.yml test --with-registry-auth
+      - docker stack deploy -c api.yml test--with -registry-auth
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
