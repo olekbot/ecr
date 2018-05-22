@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  nginx-test:
+    image: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo
+    networks:
+      - appnet
+    deploy:
+      replicas: 1
+      labels:
+        - traefik.port=80
+        - traefik.frontend.passHostHeader=true
+        - traefik.frontend.rule=Host:uptest.treehub.me;Path:/api
+        - traefik.frontend.headers.SSLRedirect=true
+        - traefik.docker.network=appnet
+
+networks:
+  appnet:
+    external: true
