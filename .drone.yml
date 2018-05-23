@@ -13,10 +13,10 @@ pipeline:
     dockerfile: Dockerfile.api
     tags: ${DRONE_COMMIT_SHA} 
   deploy_prod:
-    image: docker
+    image: ubox/dockerawscli
     commands:
-      - apk --no-cache add python py-pip py-setuptools ca-certificates curl groff less && \
-      - pip --no-cache-dir install awscli
+#       - apk --no-cache add python py-pip py-setuptools ca-certificates curl groff less && \
+#       - pip --no-cache-dir install awscli
       - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
       - eval $login_string
       - docker stack deploy -c app.yml test --with-registry-auth
