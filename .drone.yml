@@ -5,17 +5,13 @@ pipeline:
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
     tags: ${DRONE_COMMIT_SHA}
-    when:
-      branch: master
   build_api:
     image: plugins/ecr
     repo: 153804614251.dkr.ecr.us-east-1.amazonaws.com/ecr-demo-api
     registry: 153804614251.dkr.ecr.us-east-1.amazonaws.com
     region: us-east-1
     dockerfile: Dockerfile.api
-    tags: ${DRONE_COMMIT_SHA}
-    when:
-      branch: master      
+    tags: ${DRONE_COMMIT_SHA} 
   deploy_prod:
     image: docker
     commands:
@@ -36,9 +32,11 @@ pipeline:
       - pip --no-cache-dir install awscli
       - export login_string=`aws ecr get-login --no-include-email --region us-east-1`
       - eval $login_string
-      - docker stack deploy -c app.yml test --with-registry-auth
-      - docker stack deploy -c api.yml test --with-registry-auth
+      - docker stack deploy -c app-stage.yml test --with-registry-auth
+      - docker stack deploy -c api-stage.yml test --with-registry-auth
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
       branch: stage
+
+branches: [master, stage]
